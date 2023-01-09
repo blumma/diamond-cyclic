@@ -1,14 +1,9 @@
 {
-  "name": "tree-testing",
+  "name": "diamond-cyclic",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "node server.js",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build --output-path dist"
+    "build": "ng build --configuration production --output-path public"
   },
   "private": true,
   "dependencies": {
