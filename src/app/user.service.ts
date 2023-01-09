@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import * as UserPaths from '../../server/user-paths.js';
+import { environment } from 'src/environments/environment';
+
 
 export class User {
     id: number;
@@ -11,7 +12,7 @@ export class User {
 @Injectable()
 export class UserService {
 
-    serverUrl = UserPaths.server_url;
+    serverUrl = environment.serverUrl;
 
     constructor(private http: HttpClient) { }
 
