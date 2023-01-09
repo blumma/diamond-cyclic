@@ -11,18 +11,6 @@ const userService = require('./server/src/services/account.service');
 
 var mongodb = require("mongodb");
 
-/////
-
-// Create link to Angular build directory
-var distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
-
-/////
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cors());
-
 // INFO: this is from cyclic html fullstack template
 // #############################################################################
 // This configures static hosting for files in /public that have the extensions
@@ -35,7 +23,11 @@ var options = {
   maxAge: '1m',
   redirect: false
 }
-app.use(express.static('dist/', options))
+app.use(express.static('public/', options));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
 // use JWT auth to secure the api
 app.use(jwt());
@@ -52,7 +44,7 @@ app.use(errorHandler);
 
 // start server
 const port = process.env.PORT || 48792;
-const dbConnectionUrl = process.env.DB_CONNECTION_URL || db.database_connection_url;
+// const dbConnectionUrl = process.env.DB_CONNECTION_URL || db.database_connection_url;
 
 const adminEmail = process.env.ADMIN_EMAIL || 'admin';
 const adminPwd = process.env.ADMIN_PWD || 'admin189m';
@@ -61,7 +53,7 @@ const adminPwd = process.env.ADMIN_PWD || 'admin189m';
   var dbb;
 
   // Connect to the database before starting the application server.
-  mongodb.MongoClient.connect(dbConnectionUrl, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+  mongodb.MongoClient.connect(db.database_connection_url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
     if (err) {
       console.log(err);
       process.exit(1);
