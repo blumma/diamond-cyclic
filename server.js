@@ -53,13 +53,17 @@ app.use('/users', require('./server/src/controllers/tree-test-test.controller'))
 app.use(errorHandler);
 
 // start server
-const port = 48792;
+const port = process.env.PORT || 48792;
+const dbConnectionUrl = process.env.DB_CONNECTION_URL || db.database_connection_url;
+
+const adminEmail = process.env.ADMIN_EMAIL || 'admin';
+const adminPwd = process.env.ADMIN_PWD || 'admin189m';
 
 
   var dbb;
 
   // Connect to the database before starting the application server.
-  mongodb.MongoClient.connect(db.database_connection_url || db.database_connection_url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+  mongodb.MongoClient.connect(dbConnectionUrl, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
     if (err) {
       console.log(err);
       process.exit(1);
@@ -70,12 +74,12 @@ const port = 48792;
     console.log("Database connection ready");
   
     // Initialize the app.
-    var server = app.listen(process.env.PORT || 48792, function () {
+    var server = app.listen(port, function () {
       var port = server.address().port;
       console.log("App now running on port", port);
 
       // add admin user
-      userService.create({ email: 'admin', password: 'admin189m' })
+      userService.create({ email: adminEmail, password: adminPwd })
         .then(() => res.json({}))
         .catch(err => {});
       // { email: 'newuser', password: 'newuser' }
