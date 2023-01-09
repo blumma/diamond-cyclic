@@ -5,8 +5,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('./server/_helpers/jwt');
 const errorHandler = require('./server/_helpers/error-handler');
-const config = require('./server/config.json');
-const expressJwt = require('express-jwt');
 const db = require('./server/_helpers/db');
 
 const userService = require('./server/src/services/account.service');
