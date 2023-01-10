@@ -6,6 +6,9 @@
     "build": "ng build --configuration production --output-path public"
   },
   "private": true,
+  "engines": {
+    "node": "^16.18"
+  },
   "dependencies": {    
     "@json2csv/plainjs": "^6.1.2",    
     "bcryptjs": "^2.4.3",
