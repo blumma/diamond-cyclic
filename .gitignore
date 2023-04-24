@@ -3,6 +3,9 @@
 # environment
 .env
 
+# docker
+/deploy/local/mongodb/data
+
 # compiled output
 /dist
 /tmp
