@@ -52,28 +52,8 @@ const appPort = process.env.PORT || 8000;
 const adminEmail = process.env.ADMIN_EMAIL || 'admin';
 const adminPwd = process.env.ADMIN_PWD || 'admin189m';
 
-var dbb;
+var server = app.listen(appPort, function () {
+  var port = server.address().port;
+  console.log("App now running on port", port);
 
-// Connect to the database before starting the application server.
-mongodb.MongoClient.connect(db.database_connection_url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-
-  // Save database object from the callback for reuse.
-  dbb = client.db();
-  console.log("Database connection ready");
-
-  // Initialize the app.
-  var server = app.listen(appPort, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
-
-    // add admin user
-    userService.create({ email: adminEmail, password: adminPwd })
-      .then(() => res.json({}))
-      .catch(err => {});
-
-  });
 });
