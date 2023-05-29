@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "postinstall": "node extract-version-info.js",
-    "start": "npm start --workspace server --loglevel=verbose",
+    "start": "npm start --workspace server --loglevel=silent",
     "build": "npm run build --workspace client"
   },
   "repository": {
