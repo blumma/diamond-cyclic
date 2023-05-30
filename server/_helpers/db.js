@@ -6,11 +6,11 @@ const mongoose = require('mongoose');
 
 const database_connection_url = process.env.DB_CONNECTION_URL || 'mongodb://localhost:27017/node-mongo-registration-login-api';
 
-// mongoose.connect(database_connection_url, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
-// mongoose.Promise = global.Promise;
+mongoose.connect(database_connection_url, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.Promise = global.Promise;
 
 
-const connectDB = async () => {
+/*const connectDB = async () => {
   try {
     const conn = await mongoose.connect(database_connection_url, {
       useCreateIndex: true,
@@ -23,7 +23,7 @@ const connectDB = async () => {
     console.log('MongoDB Error');
     process.exit(1);
   }
-}
+}*/
 
 module.exports = {
     Account: require('../src/models/account.model'),
@@ -31,6 +31,5 @@ module.exports = {
     TreeTestTest: require('../src/models/tree-test-test.model'),
     CardSortStudy: require('../src/models/card-sort-study.model'),
     CardSortTest: require('../src/models/card-sort-test.model'),
-    connectDB,
     database_connection_url
 };
