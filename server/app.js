@@ -38,7 +38,7 @@ const maxPayloadSize = process.env.MAX_REQUEST_PAYLOAD_SIZE || '6mb';
 app.use(bodyParser.urlencoded({ extended: false, limit: maxPayloadSize }));
 app.use(bodyParser.json({ limit: maxPayloadSize }));
 
-app.use(jwt());
+// app.use(jwt());
 
 // app.use('/users', accountController);
 
