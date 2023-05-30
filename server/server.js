@@ -10,8 +10,6 @@ const db = require('./_helpers/db');
 
 const userService = require('./src/services/account.service');
 
-var mongodb = require("mongodb");
-
 // #############################################################################
 // This configures static hosting for files in /public that have the extensions
 // listed in the array.

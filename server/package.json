@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "description": "Diamond Backend Service/API",
     "scripts": {
-        "start": "node index.js"
+        "start": "node server.js"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
