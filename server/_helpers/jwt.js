@@ -18,7 +18,8 @@ function jwt() {
             '/users/tree-study/password',
             '/users/card-sort-study/password',
             '/users/tree-tests/add',
-            '/users/card-sort-tests/add'
+            '/users/card-sort-tests/add',
+            '/^(?!\/users).*/'
 
         ]
     });
