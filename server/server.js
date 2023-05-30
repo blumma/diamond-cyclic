@@ -35,7 +35,7 @@ app.use(bodyParser.json({ limit: maxPayloadSize }));
 
 
 // use JWT auth to secure the api
-app.use(jwt());
+// app.use(jwt());
 
 // api routes
 app.use('/users', require('./src/controllers/account.controller'));
@@ -52,8 +52,16 @@ const appPort = process.env.PORT || 8000;
 const adminEmail = process.env.ADMIN_EMAIL || 'admin';
 const adminPwd = process.env.ADMIN_PWD || 'admin189m';
 
-var server = app.listen(appPort, function () {
-  var port = server.address().port;
-  console.log("App now running on port", port);
+// Connect to the database before listening
+db.connectDB().then(() => {
+  const server = app.listen(appPort, () => {
+    const port = server.address().port;
+    console.log("App now running on port", port);
 
+    // add admin user
+    userService.create({ email: adminEmail, password: adminPwd })
+      .then(() => res.json({}))
+      .catch(err => {});
+
+  });
 });
