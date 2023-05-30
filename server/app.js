@@ -1,12 +1,17 @@
-const express = require('express')
-const path = require("path");
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+// const jwt = require('./_helpers/jwt');
+const errorHandler = require('./_helpers/error-handler');
+
 const app = express();
 
 // #############################################################################
 // Logs all request paths and method
 app.use(function (req, res, next) {
-  res.set('x-timestamp', Date.now())
-  res.set('x-powered-by', 'cyclic.sh')
+  res.set('x-timestamp', Date.now());
+  res.set('x-powered-by', 'cyclic.sh');
   console.log(`[${new Date().toISOString()}] ${req.ip} ${req.method} ${req.path}`);
   next();
 });
@@ -21,23 +26,18 @@ var options = {
   index: ['index.html'],
   maxAge: '1m',
   redirect: false
-}
-app.use(express.static('public', options))
+};
+const publicDir = process.env.PUBLIC_DIR || '../client/dist/client';
+app.use(express.static(publicDir, options));
 
-// #############################################################################
-// Catch all handler for all other request.
-app.use('*', (req,res) => {
-  res.json({
-      at: new Date().toISOString(),
-      method: req.method,
-      hostname: req.hostname,
-      ip: req.ip,
-      query: req.query,
-      headers: req.headers,
-      cookies: req.cookies,
-      params: req.params
-    })
-    .end();
-});
+app.use(cors());
+
+const maxPayloadSize = process.env.MAX_REQUEST_PAYLOAD_SIZE || '6mb';
+app.use(bodyParser.urlencoded({ extended: false, limit: maxPayloadSize }));
+app.use(bodyParser.json({ limit: maxPayloadSize }));
+
+app.use('/users', require('./src/controllers/account.controller'));
+
+app.use(errorHandler);
 
 module.exports = app
