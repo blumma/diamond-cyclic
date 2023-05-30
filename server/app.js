@@ -37,7 +37,7 @@ app.use('*', (req,res) => {
       cookies: req.cookies,
       params: req.params
     })
-    .end()
-})
+    .end();
+});
 
 module.exports = app
