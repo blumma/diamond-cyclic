@@ -39,7 +39,7 @@ app.use(bodyParser.json({ limit: maxPayloadSize }));
 
 app.use(jwt());
 
-app.use('/users', accountController);
+// app.use('/users', accountController);
 
 app.use(errorHandler);
 
