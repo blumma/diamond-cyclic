@@ -6,8 +6,8 @@ const adminEmail = process.env.ADMIN_EMAIL || 'admin';
 const adminPwd = process.env.ADMIN_PWD || 'admin189m';
 
 // Connect to the database before listening
-// db.connectDB().then(() => {
+db.connectDB().then(() => {
   app.listen(appPort, () => {
     console.log(`Example app listening at http://localhost:${appPort}`);
   });
-// });
+});

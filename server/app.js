@@ -1,11 +1,11 @@
 // require('dotenv').config({ path: '../.env' });
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const jwt = require('./_helpers/jwt');
-const errorHandler = require('./_helpers/error-handler');
-const accountController = require('./src/controllers/account.controller');
+// const jwt = require('./_helpers/jwt');
+// const errorHandler = require('./_helpers/error-handler');
+// const accountController = require('./src/controllers/account.controller');
 
 const app = express();
 
@@ -32,16 +32,16 @@ var options = {
 const publicDir = process.env.PUBLIC_DIR || '../client/dist/client';
 app.use(express.static(publicDir, options));
 
-app.use(cors());
+// app.use(cors());
 
 const maxPayloadSize = process.env.MAX_REQUEST_PAYLOAD_SIZE || '6mb';
 app.use(bodyParser.urlencoded({ extended: false, limit: maxPayloadSize }));
 app.use(bodyParser.json({ limit: maxPayloadSize }));
 
-app.use(jwt());
+// app.use(jwt());
 
-app.use('/users', accountController);
+// app.use('/users', accountController);
 
-app.use(errorHandler);
+// app.use(errorHandler);
 
-module.exports = app
+module.exports = app;
